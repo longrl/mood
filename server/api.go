@@ -9,5 +9,6 @@ func RegisterRoute(route *gin.Engine) {
 	blog := route.Group("blog")
 	{
 		blog.POST("/authority", controller.Authority)
+		blog.GET("/captcha", controller.ShowCaptcha)
 	}
 }

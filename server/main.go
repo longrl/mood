@@ -12,6 +12,8 @@ func main() {
 
 	// 初始化DB
 	config.SetupDB()
+	// 初始化redis
+	config.SetupRedis()
 	config.DB.AutoMigrate(&secret.Secret{})
 	// 注册路由
 	RegisterRoute(router)
