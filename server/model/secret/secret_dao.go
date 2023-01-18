@@ -8,8 +8,7 @@ func IsKey(secret string) bool {
 	return count > 0
 }
 
-func FindByKey(key string) *Secret {
-	s := &Secret{}
-	config.DB.First(s)
-	return s
+func FindByKey(key string) (s Secret) {
+	config.DB.Model(Secret{}).Where("secret = ?", key).First(&s)
+	return
 }
