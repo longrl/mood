@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/longrl/mood/config"
+	"github.com/longrl/mood/model/article"
 	"github.com/longrl/mood/model/secret"
 )
 
@@ -15,6 +16,7 @@ func main() {
 	// 初始化redis
 	config.SetupRedis()
 	config.DB.AutoMigrate(&secret.Secret{})
+	config.DB.AutoMigrate(&article.Article{})
 	// 注册路由
 	RegisterRoute(router)
 

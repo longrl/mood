@@ -1,10 +1,7 @@
-package article
+package request
 
-import "github.com/longrl/mood/model"
-
-type Article struct {
-	model.BaseModel
-
+type ArticleRequest struct {
+	Id       int
 	Title    string `json:"title"`
 	Top      int8   `json:"top"`
 	Image    string `json:"image"`

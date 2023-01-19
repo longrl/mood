@@ -20,7 +20,7 @@ func Authority(c *gin.Context) {
 	// 将secret数据存入session中或者redis中
 	if ok {
 		// 设置授权时间为12h
-		config.Redis.Set(c.RemoteIP(), s.Role, 12*time.Hour)
+		config.Redis.Set(c.ClientIP(), s.Role, 12*time.Hour)
 		response.Success(c)
 	} else {
 		response.Abort403(c)

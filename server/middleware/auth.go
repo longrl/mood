@@ -8,7 +8,7 @@ import (
 
 func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		role := config.Redis.Get(c.RemoteIP())
+		role := config.Redis.Get(c.ClientIP())
 		if role != "2" {
 			response.Abort403(c)
 		}
