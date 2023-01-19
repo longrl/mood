@@ -7,6 +7,7 @@ import (
 )
 
 func RegisterRoute(route *gin.Engine) {
+	route.Use(middleware.Cors())
 	blog := route.Group("blog")
 	{
 		blog.POST("/authority", controller.Authority)
