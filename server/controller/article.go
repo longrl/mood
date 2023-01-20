@@ -59,6 +59,12 @@ func Top(c *gin.Context) {
 	response.Success(c)
 }
 
+func GetTop(c *gin.Context) {
+	s := service.ArticleService{}
+	vo := s.GetTop()
+	response.Data(c, vo)
+}
+
 // Add 新增博客接口
 func Add(c *gin.Context) {
 	req := request.ArticleRequest{}

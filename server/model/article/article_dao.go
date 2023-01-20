@@ -37,3 +37,9 @@ func Delete(id string) bool {
 	res := config.DB.Where("id = ?", id).Delete(&Article{})
 	return res.RowsAffected > 0
 }
+
+func FindByTop() *Article {
+	var a = &Article{}
+	config.DB.Model(&Article{}).Where("top = ?", 1).First(a)
+	return a
+}

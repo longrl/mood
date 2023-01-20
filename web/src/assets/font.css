@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'ragflij';
+    src: url("ragflij-alkwl.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'black';
+    src: url("Merriweather-Black.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'noto';
+    src: url("NotoSerifSC-Light.otf");
+    font-weight: normal;
+    font-style: normal;
+}

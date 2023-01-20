@@ -17,6 +17,7 @@ func RegisterRoute(route *gin.Engine) {
 		blog.GET("/list", middleware.LimitPerRoute("10000-H"), controller.List)
 		blog.GET("/archive", middleware.LimitPerRoute("10000-H"), controller.Archive)
 		blog.GET("/delete/:id", middleware.Auth(), controller.Delete)
+		blog.GET("/top", middleware.LimitPerRoute("10000-H"), controller.GetTop)
 		blog.POST("/add", middleware.Auth(), controller.Add)
 		blog.POST("/detail", middleware.Auth(), controller.UpdateDetail)
 		blog.POST("/top/:id", middleware.Auth(), controller.Top)
