@@ -1,16 +1,22 @@
 <template>
   <div class="blog">
-    <v-md-editor v-model="data.content" height="500px 100%"></v-md-editor>
+    <v-md-editor
+        v-model="data.content"
+        height="500px"
+        :disabled-menus="[]"
+        @upload-image="handleUploadImage"
+    ></v-md-editor>
   </div>
   <div class="input">
     <div></div>
     <div class="music_url">
       <div class="music_url_input">
-        <el-input v-model="input" disabled placeholder="music url"/>
+        <el-input v-model="data.music_url" disabled placeholder="music url"/>
       </div>
       <el-upload
           class="upload-demo"
-          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          action="http://localhost:8080/blog/upload"
+          show-file-list= false
           :on-success="upload"
       >
         <el-button type="info">Click to upload</el-button>
@@ -39,7 +45,6 @@
         console.log(id)
         http.get("detail/" + id).then(({data}) => {
           this.data = data.data
-          this.input = data.data.music_url
         })
         this.flag = 1
       }
@@ -56,12 +61,14 @@
           "music_url": "",
           "category": ""
         },
-        input: "",
+
         flag: 0
       }
     },
     methods: {
       upload(response) {
+        console.log(response.url)
+        this.data.music_url = response.url
       },
       create() {
         console.log(this.data)
@@ -73,7 +80,20 @@
       },
       update() {
 
-      }
+      },
+      handleUploadImage(event, insertImage, files) {
+        // 拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
+        let formdata = new FormData()
+        formdata.append('file', files[0])
+        console.log(files)
+        http.post("upload", formdata, {headers : {'Content-Type': 'multipart/form-data'}}).then(({data}) => {
+          insertImage({
+            url: data.url,
+            width: "200px",
+            height: "200px"
+          });
+        })
+      },
     }
   }
 </script>
@@ -87,7 +107,7 @@
     justify-content: space-between;
   }
   .music_url_input {
-    width: 300px;
+    width: 380px;
   }
   .submit {
     margin-top: 30px;

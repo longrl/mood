@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"github.com/gin-gonic/gin"
@@ -8,6 +8,7 @@ import (
 
 func RegisterRoute(route *gin.Engine) {
 	route.Use(middleware.Cors())
+	route.MaxMultipartMemory = 8 << 20 // 8 MiB
 	blog := route.Group("blog")
 	{
 		blog.POST("/authority", controller.Authority)
@@ -21,5 +22,6 @@ func RegisterRoute(route *gin.Engine) {
 		blog.POST("/add", middleware.Auth(), controller.Add)
 		blog.POST("/detail", middleware.Auth(), controller.UpdateDetail)
 		blog.POST("/top/:id", middleware.Auth(), controller.Top)
+		blog.POST("/upload", controller.Upload)
 	}
 }

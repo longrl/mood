@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/longrl/mood/api"
 	"github.com/longrl/mood/config"
 	"github.com/longrl/mood/model/article"
 	"github.com/longrl/mood/model/secret"
@@ -10,7 +11,6 @@ import (
 func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
-
 	// 初始化DB
 	config.SetupDB()
 	// 初始化redis
@@ -18,7 +18,7 @@ func main() {
 	config.DB.AutoMigrate(&secret.Secret{})
 	config.DB.AutoMigrate(&article.Article{})
 	// 注册路由
-	RegisterRoute(router)
+	api.RegisterRoute(router)
 
 	router.Run(":8080")
 }
