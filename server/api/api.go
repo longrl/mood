@@ -12,7 +12,7 @@ func RegisterRoute(route *gin.Engine) {
 	blog := route.Group("blog")
 	{
 		blog.POST("/authority", controller.Authority)
-		blog.GET("/captcha", middleware.Auth(), middleware.LimitPerRoute("600-H"), controller.ShowCaptcha)
+		blog.GET("/captcha", middleware.LimitPerRoute("600-H"), controller.ShowCaptcha)
 
 		blog.GET("/detail/:id", middleware.LimitPerRoute("10000-H"), controller.Detail)
 		blog.GET("/list", middleware.LimitPerRoute("10000-H"), controller.List)

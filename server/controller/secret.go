@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/longrl/mood/config"
+	"github.com/longrl/mood/config/captcha"
 	"github.com/longrl/mood/request"
 	"github.com/longrl/mood/response"
 	"github.com/longrl/mood/service"
@@ -12,7 +14,17 @@ import (
 func Authority(c *gin.Context) {
 	req := request.SecretRequest{}
 	err := c.ShouldBind(&req)
-	if err != nil {
+	if err != nil || req.Id == "" {
+		response.Error(c, errors.New("mood: 传入参数有问题"))
+		return
+	}
+
+	ok := captcha.NewCaptcha().VerifyCaptcha(req.Id, req.Answer)
+	if !ok {
+		response.JSON(c, gin.H{
+			"code":    999,
+			"message": "验证失败",
+		})
 		return
 	}
 	secretService := service.SecretService{}

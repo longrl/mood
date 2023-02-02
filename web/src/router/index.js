@@ -17,6 +17,11 @@ const router = createRouter({
       path: '/blog/update/:id',
       name: 'editor',
       component: () => import('../views/Editor.vue')
+    },
+    {
+      path: '/blog/auth',
+      name: 'auth',
+      component: () => import('../views/Auth.vue')
     }
   ]
 })

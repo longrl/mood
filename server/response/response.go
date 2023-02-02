@@ -12,7 +12,7 @@ func JSON(c *gin.Context, data interface{}) {
 
 func Success(c *gin.Context) {
 	JSON(c, gin.H{
-		"success": true,
+		"code":    1000,
 		"message": "操作成功！",
 	})
 }
@@ -49,6 +49,7 @@ func Error(c *gin.Context, err error, msg ...string) {
 	}
 
 	c.AbortWithStatusJSON(http.StatusUnprocessableEntity, gin.H{
+		"code":    999,
 		"message": defaultMessage("请求处理失败，请查看 error 的值", msg...),
 		"error":   err.Error(),
 	})

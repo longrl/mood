@@ -21,7 +21,7 @@
     data() {
       return {
         blog: [],
-        category:["技术", "随想"]
+        category:["", "技术", "随想"]
       }
     },
     created() {
